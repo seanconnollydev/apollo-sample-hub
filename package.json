@@ -2,11 +2,12 @@
   "name": "apollo-sample-hub",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "dependencies": {
     "@okgrow/graphql-scalars": "0.4.5",
     "apollo-datasource-rest": "0.3.2",
     "apollo-server-express": "2.4.8",
+    "apollo-server-micro": "2.6.1",
     "express": "4.17.1",
     "glob": "7.1.3",
     "graphql": "14.3.1",
@@ -15,11 +16,11 @@
     "lodash": "4.17.11"
   },
   "devDependencies": {
+    "micro": "9.3.4",
     "nodemon": "1.19.1"
   },
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js"
+    "dev": "micro"
   },
   "repository": {
     "type": "git",
