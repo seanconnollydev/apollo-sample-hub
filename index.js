@@ -1,4 +1,5 @@
-const { ApolloServer, gql } = require('apollo-server-micro')
+const { ApolloServer, gql } = require('apollo-server-micro');
+const { buildFederatedSchema } = require("@apollo/federation");
 const { UsersAPI } = require('./UsersAPI');
 
 const typeDefs = gql`
@@ -6,7 +7,7 @@ const typeDefs = gql`
     user(id: ID!): User
   }
 
-  type User {
+  type User @key(fields: "id") {
     id: ID!
     name: String!
   }
@@ -17,12 +18,23 @@ const resolvers = {
     user(_, args, { dataSources }) {
       return dataSources.users.getUser(args.id);
     },
+  },
+  User: {
+    __resolveReference(object, other) {
+      console.log('object', object);
+      console.log('other', other);
+     return { id: '1' };
+   }
   }
 }
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema: buildFederatedSchema([
+    {
+      typeDefs,
+      resolvers
+    }
+  ]),
   dataSources: () => ({
     users: new UsersAPI(),
   }),
