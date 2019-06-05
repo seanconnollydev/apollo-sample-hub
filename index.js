@@ -16,14 +16,13 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     user(_, args, { dataSources }) {
+      console.log('user', args);
       return dataSources.users.getUser(args.id);
     },
   },
   User: {
-    __resolveReference(object, other) {
-      console.log('object', object);
-      console.log('other', other);
-     return { id: '1' };
+    __resolveReference(user, { dataSources }) {
+      return dataSources.users.getUser(user.id);
    }
   }
 }
