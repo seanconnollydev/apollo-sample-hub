@@ -4,7 +4,6 @@ const _merge = require('lodash/merge');
 
 const resolvers = {
   Query: {},
-  Mutation: {},
 };
 
 const resolverFiles = glob.sync(path.join(__dirname, 'graphql/**/*.+(directive|enum|field|input|mutation|scalar|query).js'));

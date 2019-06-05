@@ -1,5 +1,5 @@
 const { ApolloServer } = require('apollo-server-express');
-const { ExampleAPI } = require('./data-sources/ExampleAPI');
+const { UsersAPI } = require('./data-sources/UsersAPI');
 const { createSchema } = require('./createSchema');
 
 const createApolloServer = () => {
@@ -8,7 +8,7 @@ const createApolloServer = () => {
   return new ApolloServer({
     schema,
     dataSources: () => ({
-      exampleAPI: new ExampleAPI(),
+      users: new UsersAPI(),
     }),
     debug: process.env.NODE_ENV !== 'production',
     tracing: true,
